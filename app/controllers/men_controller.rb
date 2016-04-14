@@ -6,7 +6,7 @@ include Shuffle
 
   def index
     if params
-      video_shuffle(params[:rating], req.body.data, Men.videos)
+      video = video_shuffle(params[:rating], req.body.data, Men.videos)
     else
       video = Men.videos.pop
     end
