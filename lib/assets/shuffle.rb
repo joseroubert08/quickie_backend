@@ -7,7 +7,7 @@ module Shuffle
     else
       video_array.sort_by! { |video| -video.tags == sortable_tags }
     end
-    video_array.pop
+    video_array
   end
 
 end
