@@ -1,5 +1,5 @@
-require 'lib/assets/men_preprocessor'
-require 'lib/assets/women_preprocessor'
+require './lib/assets/men_preprocessor'
+require './lib/assets/women_preprocessor'
 
 desc "This task is called by the Heroku scheduler add-on"
 task :update_videos => :environment do
