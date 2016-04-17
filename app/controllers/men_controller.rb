@@ -5,14 +5,8 @@ class MenController < ApplicationController
 include Shuffle
 
   def index
-    if params[:rating]
-      session[:videos] = video_shuffle(params[:rating], request.body, session[:videos])
-      video = session[:videos].first
-    else
-      session[:videos] = Men.videos
-      video = session[:videos].first
-    end
-    video
+    new_video = return_video(params[:rating], Men.videos)
+    render: new_video.to_json
   end
 
 end
