@@ -4,9 +4,10 @@ class WomenController < ApplicationController
 
 include Shuffle
 
-def index
-  new_video = return_video(params[:rating], Women.videos)
-  render: new_video.to_json
-end
+  def index
+    video_array_query = Woman.select('videos').where(id: 1)
+    new_video = return_video(params[:rating], video_array_query)
+    render :json => new_video.videos
+  end
 
 end
