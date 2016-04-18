@@ -2,19 +2,23 @@ require './app/models/man'
 
 class MenPreprocessor
 
-  urls_to_request = ['http://www.pornhub.com/webmasters/search?thumbsize=small&category=gay']
+  @urls_to_request = ['http://www.pornhub.com/webmasters/search?thumbsize=small&category=gay',
+  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=asian-gay']
 
-  def self.process
-    sorted_content = sort_by_rating(request_content)
+  def process
+    sorted_content = sort_by_rating(request_content(@urls_to_request.to_a))
     videos_for_use = reduce_array_size(sorted_content)
-    Man.update_attribute('videos', videos_for_use).where('id', 1)
+    Man.update_all(videos: videos_for_use)
   end
 
-  def request_content
+  def request_content(urls_array)
     requested_content_array = []
-    urls_to_request.each do |url|
-      response = HTTParty.get(url)
-      requested_content_array << response.body.videos
+    urls_array.each do |url|
+      50.times do
+        random_num_string = rand(1..8000).to_s
+        response = HTTParty.get(url + '&page=' + random_num)
+        requested_content_array << response.body.videos
+      end
     end
     requested_content_array
   end

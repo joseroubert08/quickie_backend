@@ -4,10 +4,12 @@ require './lib/assets/women_preprocessor'
 desc "This task is called by the Heroku scheduler add-on"
 task :update_videos => :environment do
   puts "Updating Male videos..."
-  MenPreprocessor.process
+  men_preprocessor = MenPreprocessor.new
+  men_preprocessor.process
   puts "Male videos updated!"
   puts "Updating Female videos..."
-  WomenPreprocessor.process
+  women_preprocessor = WomenPreprocessor.new
+  women_preprocessor.process
   puts "Female videos updated!"
   puts "Videos are finished!"
 end
