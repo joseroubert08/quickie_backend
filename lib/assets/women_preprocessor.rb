@@ -1,19 +1,14 @@
 require './app/models/woman'
+require 'json'
 
 class WomenPreprocessor
 
-  @urls_to_request = ['http://www.pornhub.com/webmasters/search?thumbsize=small&category=amateur',
-  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=anal',
-  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=babe',
-  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=female-friendly',
-  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=lesbian',
-  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=asian',
-  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=big-boobs',
-  'http://www.pornhub.com/webmasters/search?thumbsize=small&category=milf',
-  ]
+  def initialize(url_array)
+    @urls = url_array
+  end
 
   def process
-    sorted_content = sort_by_rating(request_content(@urls_to_request.to_a))
+    sorted_content = sort_by_rating(request_content(@urls))
     videos_for_use = reduce_array_size(sorted_content)
     Woman.update_all(videos: videos_for_use)
   end
@@ -23,16 +18,17 @@ class WomenPreprocessor
     urls_array.each do |url|
       50.times do
         random_num_string = rand(1..8000).to_s
-        response = HTTParty.get(url + '&page=' + random_num)
-        requested_content_array << response.body.videos
+        response = HTTParty.get(url + '&page=' + random_num_string)
+        parsed_response = JSON.parse(response.body)
+        requested_content_array << parsed_response['videos']
       end
     end
-    requested_content_array
+    requested_content_array.flatten
   end
 
   def sort_by_rating(unsorted_array)
     videos_by_rating = unsorted_array.sort_by do |video|
-      video.rating
+      video['rating']
     end
     videos_by_rating
   end
