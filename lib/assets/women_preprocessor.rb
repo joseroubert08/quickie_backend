@@ -27,8 +27,8 @@ class WomenPreprocessor
   end
 
   def sort_by_rating(unsorted_array)
-    videos_by_rating = unsorted_array.sort_by do |video|
-      video['rating']
+    videos_by_rating = unsorted_array.sort do |a, b|
+      a['rating'].to_f <=> b['rating'].to_f
     end
     videos_by_rating
   end

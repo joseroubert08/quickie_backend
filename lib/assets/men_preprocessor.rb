@@ -16,7 +16,7 @@ class MenPreprocessor
   def request_content(urls_array)
     requested_content_array = []
     urls_array.each do |url|
-      50.times do
+      100.times do
         random_num_string = rand(1..8000).to_s
         response = HTTParty.get(url + '&page=' + random_num_string)
         parsed_response = JSON.parse(response.body)
@@ -27,8 +27,8 @@ class MenPreprocessor
   end
 
   def sort_by_rating(unsorted_array)
-    videos_by_rating = unsorted_array.sort_by do |video|
-      video['rating']
+    videos_by_rating = unsorted_array.sort do |a, b|
+      a['rating'].to_f <=> b['rating'].to_f
     end
     videos_by_rating
   end

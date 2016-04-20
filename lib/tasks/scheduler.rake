@@ -7,9 +7,11 @@ task :update_videos => :environment do
   men_preprocessor = MenPreprocessor.new(Man.pluck(:urls).flatten)
   men_preprocessor.process
   puts "Male videos updated!"
+  p "There are " + Man.pluck(:videos).flatten.length.to_s + " male videos available"
   puts "Updating Female videos..."
   women_preprocessor = WomenPreprocessor.new(Woman.pluck(:urls).flatten)
   women_preprocessor.process
   puts "Female videos updated!"
+  p "There are " + Woman.pluck(:videos).flatten.length.to_s + " female videos available"
   puts "Videos are finished!"
 end
