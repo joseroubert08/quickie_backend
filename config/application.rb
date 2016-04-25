@@ -30,6 +30,10 @@ module QuickieBackend
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.action_dispatch.default_headers = {
+    'Access-Control-Allow-Origin' => 'http://localhost:8080',
+    'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
+    }
     config.active_record.raise_in_transactional_callbacks = true
     config.api_only = false
   end

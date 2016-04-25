@@ -10,18 +10,19 @@ module Shuffle
     video_array
   end
 
-  def return_video(rating, video_array)
+  def return_video(rating, video_array, old_id)
+    old_video = video_array.find { |video| video.video_id == old_id }
     if rating == 'dislike'
-      session[:videos] = video_shuffle(session[:video], session[:videos])
-      session[:video] = session[:videos].first
+      reshuffled_array = video_shuffle(old_video, video_array)
+      Man.update_all(videos: reshuffled_array)
+      new_video = reshuffled_array.first
     elsif rating == 'like'
-      old_video_index = video_array.index(session[:video])
-      session[:video] = video_array[old_video_index + 1]
+      old_index = video_array.index(old_video)
+      new_video = video_array[old_index + 1]
     else
-      session[:videos] = video_array
-      session[:video] = video_array.first
+      new_video = video_array.first
     end
-    session[:video]
+    new_video
   end
 
 end
