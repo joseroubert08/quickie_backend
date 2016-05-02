@@ -19,11 +19,9 @@ class MenPreprocessor
       100.times do
         random_num_string = rand(1..8000).to_s
         response = HTTParty.get(url + '&page=' + random_num_string)
-        if response.body.videos
+        if response.body['videos']
           parsed_response = JSON.parse(response.body)
           requested_content_array << parsed_response['videos']
-        else
-          break
         end
       end
     end
