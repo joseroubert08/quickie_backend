@@ -15,8 +15,8 @@ class WomenPreprocessor
 
   def request_content(urls_array)
     requested_content_array = []
-    urls_array.each do |url|
-      50.times do
+    while requested_content_array.length < 2000 do
+      urls_array.each do |url|
         random_num_string = rand(1..8000).to_s
         response = HTTParty.get(url + '&page=' + random_num_string)
         if response.body['videos']
