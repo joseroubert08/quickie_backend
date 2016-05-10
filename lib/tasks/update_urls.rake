@@ -4,16 +4,14 @@ require './lib/assets/seed'
 
 desc "Takes a txt file of urls and updates the relevant Man database field with them"
 task :update_men_urls => :environment do
-  man = Man.where(id: 1)
-  url_array = File.readlines('man_urls.txt')
-  man_seed = Seed.new(url_array, man)
-  man_seed.seed_urls
+  url_array = File.readlines('./lib/assets/man_urls.txt').map { |url| url.remove("\n") }
+  Man.update_all(:urls => url_array)
+  p "Male urls updated"
 end
 
 desc "Takes a txt file of urls and updates the relevant Woman database field with them"
 task :update_women_urls => :environment do
-  woman = Woman.where(id: 1)
-  url_array = File.readlines('woman_urls.txt')
-  woman_seed = Seed.new(url_array, woman)
-  woman_seed.seed_urls
+  url_array = File.readlines('./lib/woman_urls.txt').map { |url| url.remove("\n") }
+  Woman.update_all(:urls => url_array)
+  p "Female urls updated"
 end

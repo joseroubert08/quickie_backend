@@ -11,3 +11,5 @@
 /log/*
 !/log/.keep
 /tmp
+/lib/assets/man_urls.txt
+/lib/assets/woman_urls.txt
