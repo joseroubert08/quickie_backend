@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '4.2.6'
+gem 'rails', '5.2.4.2'
 
-gem 'rails-api'
+gem 'rails-api', '>= 0.4.0'
 
 gem 'spring', :group => :development
 
 
 gem 'pg'
 
-gem 'httparty'
+gem 'httparty', '>= 0.14.0'
 
 gem 'rack-cors'
 
