@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '4.2.6'
+gem 'rails', '6.1.7.3'
 
 gem 'rails-api'
 
@@ -10,9 +10,9 @@ gem 'spring', :group => :development
 
 gem 'pg'
 
-gem 'httparty'
+gem 'httparty', '>= 0.21.0'
 
-gem 'rack-cors'
+gem 'rack-cors', '>= 1.0.5'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
