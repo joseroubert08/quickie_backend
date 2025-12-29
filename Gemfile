@@ -10,7 +10,7 @@ gem 'spring', :group => :development
 
 gem 'pg'
 
-gem 'httparty'
+gem 'httparty', '>= 0.24.0'
 
 gem 'rack-cors'
 
